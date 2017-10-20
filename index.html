@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        body {
+            background: red;
+        }
+        
+        .a {
+            width: 400px;
+            height: 400px;
+            border: solid red 1px;
+            position: fixed;
+            box-sizing: border-box;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            background: gray;
+            z-index: 5;
+            display: none;
+        }
+        
+        .b {
+            width: 100%;
+            position: absolute;
+            display: none;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.3)
+        }
+        
+        ul {
+            width: 400px;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+        
+        ul li {
+            width: 400px;
+            height: 100px;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <button class='show'>点击出效果</button>
+    <button class='hidden'>关闭弹窗</button>
+    <div class="b"></div>
+    <div class="a">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+        </ul>
+    </div>
+</body>
+<script>
+    let ul = document.getElementsByTagName('ul')[0];
+
+    let button = document.getElementsByClassName('show')[0];
+    let close = document.getElementsByClassName('hidden')[0];
+
+    let span = document.getElementsByTagName('span')[0];
+    let a = document.getElementsByClassName('a')[0];
+    let b = document.getElementsByClassName('b')[0];
+
+    button.addEventListener('click', () => {
+        document.body.addEventListener('touchmove', pD)
+    })
+
+    close.addEventListener('click', () => {
+        document.body.removeEventListener('touchmove', pD);
+
+    })
+
+    function pD(e) {
+        e.preventDefault();
+    }
+
+    let y, Y;
+    ul.addEventListener('touchstart', function(e) {
+        y = e.touches[0].clientY;
+    }, false)
+
+
+    ul.addEventListener('touchmove', function(e) {
+        Y = (e.changedTouches[0].clientY - y) / 6;
+
+
+        let nowTop = ul.offsetTop + Y;
+        if (nowTop > 0) {
+            nowTop = 0;
+        }
+        if (nowTop < -(ul.offsetHeight - a.offsetHeight)) {
+            nowTop = -(ul.offsetHeight - a.offsetHeight)
+        }
+
+
+        ul.style.top = nowTop + 'px'
+    }, false);
+</script>
+
+</html>
