@@ -14,7 +14,8 @@
         }
         
         body {
-            background: red;
+            background: gray;
+            height: 3000px
         }
         
         .a {
@@ -97,12 +98,13 @@
     let b = document.getElementsByClassName('b')[0];
 
     button.addEventListener('click', () => {
-        document.body.addEventListener('touchmove', pD)
+        document.body.addEventListener('touchmove', pD);
+        a.style.display='block'
     })
 
     close.addEventListener('click', () => {
         document.body.removeEventListener('touchmove', pD);
-
+        a.style.display='none'
     })
 
     function pD(e) {
